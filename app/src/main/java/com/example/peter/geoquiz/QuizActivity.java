@@ -52,8 +52,17 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        // Get references to the text view widget
+        // Get references to the text view widget and add a listener to it
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
+        mQuestionTextView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                // On toap, it moves to the next question
+                mCurrentIndex = (mCurrentIndex +1) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
         ;
 
         // Get references to the next button widget and set up a listener
