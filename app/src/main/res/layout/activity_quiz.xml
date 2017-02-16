@@ -23,13 +23,15 @@
             android:id="@+id/true_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/true_button"/>
+            android:text="@string/true_button"
+            android:padding="24dp"/>
 
         <Button
             android:id="@+id/false_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/false_button"/>
+            android:text="@string/false_button"
+            android:padding="24dp"/>
 
     </LinearLayout>
 
@@ -43,14 +45,23 @@
             android:id="@+id/previous_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="24dp"
             android:src="@drawable/arrow_left"/>
 
         <ImageButton
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="24dp"
             android:src="@drawable/arrow_right"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/cheat_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:text="@string/cheat_button"/>
 
 </LinearLayout>

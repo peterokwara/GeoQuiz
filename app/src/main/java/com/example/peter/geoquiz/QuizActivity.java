@@ -1,5 +1,7 @@
 package com.example.peter.geoquiz;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ public class QuizActivity extends AppCompatActivity {
     private ImageButton mNextButton;
     private ImageButton mPreviousButton;
     private TextView mQuestionTextView;
+    private Button mCheatButton;
 
     // Load the list of all the questions into an array
     private Question[] mQuestionBank = new Question[]{
@@ -48,19 +51,32 @@ public class QuizActivity extends AppCompatActivity {
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        // Get references to the cheat button widget and add a listener to it
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Start the cheat activity
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent i =CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+                startActivity(i);
+            }
+        });
+
         // Get references to the text view widget and add a listener to it
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
-        mQuestionTextView.setOnClickListener(new View.OnClickListener(){
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 // On toap, it moves to the next question
-                mCurrentIndex = (mCurrentIndex +1) % mQuestionBank.length;
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
             }
         });
@@ -79,7 +95,7 @@ public class QuizActivity extends AppCompatActivity {
 
         // Get references to the previous button widget and set up a listener
         mPreviousButton = (ImageButton) findViewById(R.id.previous_button);
-        mPreviousButton.setOnClickListener(new View.OnClickListener(){
+        mPreviousButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
